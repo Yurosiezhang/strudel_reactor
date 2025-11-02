@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StrudelMirror } from '@strudel/codemirror';
 import { evalScope } from '@strudel/core';
 import { drawPianoroll } from '@strudel/draw';
@@ -77,6 +77,8 @@ const hasRun = useRef(false);
         globalEditor.stop()
     }
 
+    const [songText, setSongText] = useState(stranger_tune)
+
 useEffect(() => {
 
     if (!hasRun.current) {
@@ -116,8 +118,9 @@ useEffect(() => {
         // SetupButtons()
         // Proc()
     }
+    globalEditor.setCode(songText);
 
-}, []);
+}, [songText]);
 
 
 return (
@@ -128,7 +131,7 @@ return (
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <PreprocessTextarea />
+                        <PreprocessTextarea  defaultValue={songText} onChange={(e) => setSongText(e.target.value)} />
                     </div>
                     <div className="col-md-4">
 
