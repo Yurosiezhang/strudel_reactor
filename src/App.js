@@ -1,12 +1,14 @@
 import './App.css';
 import { useEffect, useRef, useState } from "react";
-import { stranger_tune } from './tunes';
+import { coastline_tune } from './tunes';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import DJControls from './components/DJControls';
 import PlayButtons from './components/PlayButtons';
 import ProcButtons from './components/ProcButtons';
 import PreprocessTextarea from './components/PreprocessTextarea';
 import StrudelReplView from './components/StrudelReplView';
+import { preprocess } from './preprocess';
+
 
 // let globalEditor = null;
 
@@ -63,8 +65,14 @@ export default function StrudelDemo() {
 
     // const hasRun = useRef(false);
 
-    const [songText, setSongText] = useState(stranger_tune)
+    const [songText, setSongText] = useState(coastline_tune)
     const [editor, setEditor] = useState()
+
+    const [tracks, setTracks] = useState({
+        drums: true,
+        chords: true,
+        melody: true,
+    })
 
 
     const handleEditorReady = (i) => setEditor(i);
@@ -76,6 +84,19 @@ export default function StrudelDemo() {
     const handleStop = () => {
         editor.stop()
     }
+
+    const handleProcess = () => {
+        if (!editor) return;
+        const code = preprocess(songText, tracks);
+        editor.setCode(code)
+    }
+
+    const handleProcAndPlay = () => {
+        handleProcess();
+        editor.evaluate();
+    }
+
+
 
 // useEffect(() => {
 
@@ -114,7 +135,7 @@ return (
                     <div className="col-md-4">
 
                         <nav>
-                            < ProcButtons />
+                            < ProcButtons onProcess={handleProcess} onProAndPlay={handleProcAndPlay}/>
                             <br />
                             < PlayButtons onPlay={handlePlay} onStop={handleStop} />
                         </nav>
@@ -123,7 +144,7 @@ return (
                 <div className="row">
                     <StrudelReplView  onEditorReady={handleEditorReady}/>
                     <div className="col-md-4">
-                        < DJControls />
+                        < DJControls tracks={tracks} onTracksChange={setTracks} />
                     </div>
                 </div>
             </div>

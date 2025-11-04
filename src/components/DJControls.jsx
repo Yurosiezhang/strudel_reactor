@@ -1,6 +1,7 @@
 import React from 'react'
 
-function DJControls() {
+function DJControls({tracks, onTracksChange}) {
+    const currentTracks = tracks || {drums: true, chrods: true, melody: true};
   return (
     <>
         {/* input field */}
@@ -14,19 +15,29 @@ function DJControls() {
         <input type="range" className="form-range"  min="0" max="1" step="0.01" id="volume_range" />
 
         {/* Checkboxes */}
+        {/* Drums */}
         <div className="form-check">
-            <input className="form-check-input" type="checkbox" value="" id="s1" />
-            <label className="form-check-label" htmlFor="s1">s1</label>
+            <input className="form-check-input" type="checkbox" value="" id="drums"  
+            checked={currentTracks.drums}
+            onChange={(e) => onTracksChange({...currentTracks, drums: e.target.checked})}
+            />
+            <label className="form-check-label" htmlFor="s1">Drums</label>
         </div>
 
         <div className="form-check">
-            <input className="form-check-input" type="checkbox" value="" id="d1" />
-            <label className="form-check-label" htmlFor="d1">d1</label>
+            <input className="form-check-input" type="checkbox" value="" id="chords" 
+            checked={currentTracks.chrods}
+            onChange={(e) => onTracksChange({...currentTracks, chords: e.target.checked})}
+            />
+            <label className="form-check-label" htmlFor="d1">Chords</label>
         </div>
 
         <div className="form-check">
-            <input className="form-check-input" type="checkbox" value="" id="d2" />
-            <label className="form-check-label" htmlFor="d2">d2</label>
+            <input className="form-check-input" type="checkbox" value="" id="melody" 
+            checked={currentTracks.melody}
+            onChange={(e) => onTracksChange({...currentTracks, melody: e.target.checked})}
+            />
+            <label className="form-check-label" htmlFor="d2">Melody</label>
         </div>
 
     </>
