@@ -7,8 +7,8 @@ export function preprocess(rawText, tracks ={}){
 
             // match the block with tags 
             const trackPattern = new RegExp(`<${tag}>([\\s\\S]*?)</${tag}>`, 'g')
-            // if enabled, keep the inner code, otherwise replace with "_"
-            processedText = processedText.replace(trackPattern, (_, inner) => (enabled ? inner : "_"))
+            // if enabled, keep the inner code, otherwise replace with s("~")
+            processedText = processedText.replace(trackPattern, (_, inner) => (enabled ? inner : `s("~")`))
 
         }
 
