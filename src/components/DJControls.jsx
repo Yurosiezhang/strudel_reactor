@@ -1,7 +1,7 @@
 import React from 'react'
 
 function DJControls({tracks, onTracksChange}) {
-    const currentTracks = tracks || {drums: true, chrods: true, melody: true};
+    const currentTracks = tracks || {drums: true, chords: true, melody: true};
   return (
     <>
         {/* input field */}
@@ -24,14 +24,16 @@ function DJControls({tracks, onTracksChange}) {
             <label className="form-check-label" htmlFor="s1">Drums</label>
         </div>
 
+        {/* Chords */}
         <div className="form-check">
             <input className="form-check-input" type="checkbox" value="" id="chords" 
-            checked={currentTracks.chrods}
+            checked={currentTracks.chords}
             onChange={(e) => onTracksChange({...currentTracks, chords: e.target.checked})}
             />
             <label className="form-check-label" htmlFor="d1">Chords</label>
         </div>
 
+        {/* Melody */}
         <div className="form-check">
             <input className="form-check-input" type="checkbox" value="" id="melody" 
             checked={currentTracks.melody}

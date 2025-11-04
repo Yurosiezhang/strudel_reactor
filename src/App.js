@@ -93,7 +93,7 @@ export default function StrudelDemo() {
 
     const handleProcAndPlay = () => {
         handleProcess();
-        editor.evaluate();
+        editor?.evaluate();
     }
 
 
