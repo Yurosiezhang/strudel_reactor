@@ -1,5 +1,8 @@
 export const coastline_tune = `
 
+// "coastline" @by eddyflux
+// @version 1.0
+
 samples('github:eddyflux/crate')
 samples('https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/strudel.json')
 samples('https://raw.githubusercontent.com/Mittans/tidal-drum-machines/main/machines/tidal-drum-machines.json')
