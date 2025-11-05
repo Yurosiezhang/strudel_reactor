@@ -72,7 +72,7 @@ function  BPMInput({bpm, onChange, min = 40, max = 180}){
             <div className='alert alert-warning mt-2 py-1' role='alert'>{error}</div>            
         )}
         <div className='form-text text-muted mt-1'>
-            <p>BPM must be between ${min} and ${max}</p>
+            <p>{`BPM must be between ${min} and ${max}`}</p>
             Current speed: <strong>{cps !== null ? cps.toFixed(2) : "--"}</strong> CPS
         </div>
       
