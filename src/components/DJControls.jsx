@@ -1,11 +1,17 @@
 import React from 'react'
 import VolumeSlider from './VolumeSlider';
+import BPMInput from './BPMInput';
 
 
-function DJControls({tracks, onTracksChange, volume, onVolumeChange}) {
+function DJControls({
+    tracks, onTracksChange, 
+    volume, onVolumeChange,
+    bpm, onBpmChange,
+}) {
     const currentTracks = tracks || {drums: true, chords: true, melody: true};
   return (
     <>  
+        < BPMInput bpm={bpm} onChange={onBpmChange} />
         <VolumeSlider volume={volume} onVolumeChange={onVolumeChange} />
         {/* Checkboxes */}
         {/* Drums */}

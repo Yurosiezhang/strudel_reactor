@@ -8,7 +8,7 @@ import ProcButtons from './components/ProcButtons';
 import PreprocessTextarea from './components/PreprocessTextarea';
 import StrudelReplView from './components/StrudelReplView';
 import { preprocess } from './preprocess';
-import BPMInput from './components/BPMInput';
+
 
 
 // let globalEditor = null;
@@ -78,7 +78,7 @@ export default function StrudelDemo() {
 
     const handleEditorReady = (i) => setEditor(i);
 
-    const [bpm, setBmp] = useState(90)
+    const [bpm, setBpm] = useState(90)
     const cps = bpm / 120;
 
     const [volume, setVolume] = useState(0.5);
@@ -151,10 +151,10 @@ return (
                 <div className="row">
                     <StrudelReplView  onEditorReady={handleEditorReady} volume={volume}/>
                     <div className="col-md-4">
-                        < BPMInput bpm={bpm} onChange={setBmp} />
-                        < DJControls tracks={tracks} onTracksChange={setTracks}
-                        volume={volume}
-                        onVolumeChange = {setVolume}
+                        < DJControls 
+                        tracks={tracks} onTracksChange={setTracks}
+                        volume={volume} onVolumeChange = {setVolume}
+                        bpm={bpm} onBpmChange={setBpm}
                          />
                     </div>
                 </div>
