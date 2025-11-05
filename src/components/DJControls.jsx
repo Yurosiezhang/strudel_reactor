@@ -1,14 +1,12 @@
 import React from 'react'
+import VolumeSlider from './VolumeSlider';
 
 
-function DJControls({tracks, onTracksChange}) {
+function DJControls({tracks, onTracksChange, volume, onVolumeChange}) {
     const currentTracks = tracks || {drums: true, chords: true, melody: true};
   return (
-    <>       
-        {/* Volume range slider */}
-        <label htmlFor="volume_range" className="form-label">Volume</label>
-        <input type="range" className="form-range"  min="0" max="1" step="0.01" id="volume_range" />
-
+    <>  
+        <VolumeSlider volume={volume} onVolumeChange={onVolumeChange} />
         {/* Checkboxes */}
         {/* Drums */}
         <div className="form-check">

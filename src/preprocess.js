@@ -1,5 +1,5 @@
 
-export function preprocess(rawText, tracks ={}, { cps } = {}){
+export function preprocess(rawText, tracks ={}, { cps, volume } = {}){
     let processedText = rawText;
 
     // replace cps value
@@ -9,6 +9,12 @@ export function preprocess(rawText, tracks ={}, { cps } = {}){
         processedText = processedText.replace(setcpsMatch, `setcps(${cps})`);
         } 
     }
+
+    // Change volume
+    if (typeof volume === 'number') {
+        processedText = processedText.replace(/\.gain\([^)]+\)/, `.gain(${volume})`);
+    }
+
         
     //Handle the track of different stacks/instruments 
     const handleTrackToggle = (tag, enabled) => {

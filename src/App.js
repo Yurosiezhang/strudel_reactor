@@ -81,6 +81,9 @@ export default function StrudelDemo() {
     const [bpm, setBmp] = useState(90)
     const cps = bpm / 120;
 
+    const [volume, setVolume] = useState(0.5);
+
+
     const handlePlay = () => {
         editor.evaluate()
     }
@@ -91,7 +94,7 @@ export default function StrudelDemo() {
 
     const handleProcess = () => {
         if (!editor) return;
-        const code = preprocess(songText, tracks, { cps });
+        const code = preprocess(songText, tracks, { cps, volume });
         editor.setCode(code)
     }
 
@@ -146,10 +149,13 @@ return (
                     </div>
                 </div>
                 <div className="row">
-                    <StrudelReplView  onEditorReady={handleEditorReady}/>
+                    <StrudelReplView  onEditorReady={handleEditorReady} volume={volume}/>
                     <div className="col-md-4">
                         < BPMInput bpm={bpm} onChange={setBmp} />
-                        < DJControls tracks={tracks} onTracksChange={setTracks} />
+                        < DJControls tracks={tracks} onTracksChange={setTracks}
+                        volume={volume}
+                        onVolumeChange = {setVolume}
+                         />
                     </div>
                 </div>
             </div>
