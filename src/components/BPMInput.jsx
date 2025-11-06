@@ -31,7 +31,7 @@ function  BPMInput({bpm, onChange, min = 40, max = 180}){
 
         // check if input is a valid number
         if (isNaN(value)){
-            setError("⚠️ Please enter a valid BPM value - must be a number!")
+            setError("⚠️ BPM value must be a number!")
             setLocalBpm(String(bpm))
             return
         }
@@ -39,7 +39,7 @@ function  BPMInput({bpm, onChange, min = 40, max = 180}){
         // check if BMP in the valid range 
 
         if (value < min || value > max){
-            setError(`⚠️ Please enter a valid BPM value - must be between ${min} and ${max}!`)
+            setError(`⚠️ Enter a BPM between ${min} and ${max}!`)
              setLocalBpm(String(bpm))
             return
         }
@@ -53,29 +53,41 @@ function  BPMInput({bpm, onChange, min = 40, max = 180}){
 
   return (
     <>
-        {/* Display BPM (beats per minute)input field */}
-        <div className="input-group mb-3">
-            <span className="input-group-text" id="bpm_label">set BPM</span>
-            <input type="number" className={`form-control ${error ? 'is-invalid' : ''}`}
-            id="bpm_text_input" 
-            value={localBpm} 
-            min={min} 
-            max={max}
-            step="10"
-            onChange={handleInputChange}
-            onBlur={handleValidation}
-            placeholder="90" 
-            aria-label="bpm" aria-describedby="bpm_label" />
+        <div className='d-flex justify-content-center'>
+                    {/* Display BPM (beats per minute)input field */}
+            <div className="input-group mb-3" style={{ width: "320px" }}>
+                <span
+                    className="input-group-text text-white border-0 fw-semibold px-4"
+                    id="bpm_label"
+                    style={{
+                        background: "linear-gradient(90deg, #845ef7, #ff6b6b)",
+                    }}
+                >set BPM</span>
+
+                <input type="number" className={`form-control ${error ? 'is-invalid' : ''}`}
+                id="bpm_text_input" 
+                value={localBpm} 
+                min={min} 
+                max={max}
+                step="10"
+                onChange={handleInputChange}
+                onBlur={handleValidation}
+                placeholder="90" 
+                aria-label="bpm" aria-describedby="bpm_label" />
+            </div>
         </div>
         {/* Dispaly Alert if any errors */}
         {error&&(
-            <div className='alert alert-warning mt-2 py-1' role='alert'>{error}</div>            
+            <div className='alert alert-warning mt-1 py-1 text-center mx-auto' 
+            role='alert'
+            style={{ maxWidth: "340px" }}
+            >{error}</div>            
         )}
-        <div className='form-text text-muted mt-1'>
+        <div className='form-text text-muted mt-1 text-center mx-auto'
+        style={{ maxWidth: "320px" }}
+        >
             <p>{`BPM must be between ${min} and ${max}`}</p>
-            Current speed: <strong>{cps !== null ? cps.toFixed(2) : "--"}</strong> CPS
-        </div>
-      
+        </div>     
     </>
   )
 }
