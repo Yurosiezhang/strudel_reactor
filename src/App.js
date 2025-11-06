@@ -8,6 +8,7 @@ import ProcButtons from './components/ProcButtons';
 import PreprocessTextarea from './components/PreprocessTextarea';
 import StrudelReplView from './components/StrudelReplView';
 import { preprocess } from './preprocess';
+import Graph from './components/Graph';
 
 
 
@@ -130,32 +131,29 @@ export default function StrudelDemo() {
 
 
 return (
-    <div>
-        <h2>Strudel Demo- test</h2>
+    <div className='App'>
+        <h2>Strudel Demo</h2>
         <main>
-
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+                    <div className="col-md-8" style={{ maxHeight: '60vh', overflowY: 'auto' }}>
                         <PreprocessTextarea  defaultValue={songText} onChange={(e) => setSongText(e.target.value)} />
                     </div>
                     <div className="col-md-4">
-
-                        <nav>
-                            < ProcButtons onProcess={handleProcess} onProAndPlay={handleProcAndPlay}/>
-                            <br />
-                            < PlayButtons onPlay={handlePlay} onStop={handleStop} />
-                        </nav>
+                        <h2 className='mb-3'>Control Panel</h2>
+                        < ProcButtons onProcess={handleProcess} onProAndPlay={handleProcAndPlay}/>                            
+                        < DJControls 
+                                tracks={tracks} onTracksChange={setTracks}
+                                volume={volume} onVolumeChange = {setVolume}
+                                bpm={bpm} onBpmChange={setBpm}
+                        />
+                        < PlayButtons onPlay={handlePlay} onStop={handleStop} />
                     </div>
                 </div>
                 <div className="row">
                     <StrudelReplView  onEditorReady={handleEditorReady} volume={volume}/>
-                    <div className="col-md-4">
-                        < DJControls 
-                        tracks={tracks} onTracksChange={setTracks}
-                        volume={volume} onVolumeChange = {setVolume}
-                        bpm={bpm} onBpmChange={setBpm}
-                         />
+                    <div className="col-md-4 mt-5">
+                        <Graph />
                     </div>
                 </div>
             </div>
