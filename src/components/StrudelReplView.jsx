@@ -29,6 +29,10 @@ function  StrudelReplView({ onEditorReady }) {
             // Initialise canvas
             const canvas = canvasRef.current; // acccess element
             const drawContext = canvas.getContext('2d');
+
+            canvas.width = canvas.width * 2;
+            canvas.height = canvas.height * 2;
+
             const drawTime = [-2, 2]; // time window of drawn haps
 
             drawContext.fillRect(0, 0, canvas.width, canvas.height );
@@ -65,7 +69,11 @@ function  StrudelReplView({ onEditorReady }) {
             <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
                 <div ref={editorRef} />
                 <div id="output" />
-                <canvas ref={canvasRef} id='roll' width={1000} height={300} style={{ border: '1px solid black'}} />
+                <canvas ref={canvasRef} id='roll' 
+                style={{ 
+                width: '100%', height: '260px',
+                display: 'block',
+                marginBottom:0  }} />
             </div>   
         </>
     )

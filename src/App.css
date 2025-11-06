@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  min-height: 100vh;
+  padding: 2rem 0;
 }
 
 .App-logo {
@@ -36,3 +37,217 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-color: #1d1b17 !important;
+  color: #ffffff !important;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+h1, h2, h3 {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+p, label, small, span {
+  color: #dfdbce; 
+}
+
+.text-muted{
+  color: #d4d2cbc9; 
+}
+
+/* padding & margin adjustment */
+.container-fluid { 
+  padding-left: 7rem;
+  padding-right: 7rem; 
+ }
+
+ .col-md-8, .col-md-4 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Title styles */
+.top-rail {
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #ff6b6b, #845ef7);
+  box-shadow: 0 2px 12px rgba(132, 94, 247, 0.25);
+  margin-bottom: 1.25rem;
+}
+
+.app-header .col-md-8 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   
+  align-items: center;       
+  height: 160px;             
+  text-align: center;       
+}
+
+
+.app-title {
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  color: #ffffff;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+.app-title::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);  
+  bottom: -8px;
+  width: 280px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #845ef7, #ff6b6b);
+  box-shadow: 0 0 10px rgba(132, 94, 247, 0.4);
+}
+
+
+.app-subtitle {
+  text-align: left !important;
+  font-size: 1.5rem;
+  color: #845ef7;
+  letter-spacing: 0.2px;
+  font-weight: 400;
+  font-family: "Inter", "Helvetica Neue", sans-serif;
+  font-style: italic;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  opacity: 0.9;
+}
+
+/* banner */
+.header-banner {
+  height: 160px;              
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 0 24px rgba(0,0,0,.28);
+  filter: brightness(.95) saturate(1.1);
+}
+
+@media (max-width: 1400px) {
+  .header-banner { height: 130px; }
+}
+
+
+
+textarea {
+  background-color: #181818;
+  color: #ffffff;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: monospace;
+}
+
+.App button,
+.App .btn {
+  background: linear-gradient(90deg, #ff5757, #8c52ff);
+  border: none;
+  border-radius: 20px;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 8px 18px;
+  transition: all 0.2s ease-in-out;
+}
+
+
+/* Volume Slider Style  */
+.volume-wrap {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* Cover Bootstrap styles */
+.form-range.volume-range{
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 12px;
+  background: transparent !important;
+  outline: none;
+}
+
+.form-range.volume-range::-webkit-slider-runnable-track{
+  height: 12px;
+  background: linear-gradient(90deg,#ff6b6b,#845ef7);
+  border-radius: 999px;
+}
+
+.form-range.volume-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid rgba(255,255,255,.3);
+  box-shadow: 0 2px 8px rgba(142, 128, 128, 0.4);
+  transition: transform .12s ease;
+  margin-top: calc((12px - 20px) / 2 - 1px); 
+}
+
+.form-range.volume-range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+
+/* checkboxes */
+.form-check-input:checked {
+  background: linear-gradient(90deg, #ff6b6b, #845ef7);
+  border: none;
+}
+
+.form-check-input {
+  border-radius: 6px; 
+}
+
+/* textarea */
+.preprocess-textarea {
+  background-color: hsl(0, 0%, 9%);          
+  color: #f8f9fa;                     
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  font-family: "Fira Code", monospace; 
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 1rem;
+  resize: vertical;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) inset;
+}
+
+.form-label {
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+  color: #e5e5e5;
+}
+
+/* panel card */
+.panel-card{
+  background:#151515;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
+}
+
+.panel-title{
+  color:#fff;
+  font-weight:800;
+  letter-spacing:.2px;
+  margin-bottom: 12px;
+}
+
+.graph-img{
+  width: 90%;
+  aspect-ratio: 16 / 9;         
+  object-fit: cover;             
+  display: block;
+  margin: 0 auto;
+}
+
