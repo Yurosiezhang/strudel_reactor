@@ -10,6 +10,7 @@ import StrudelReplView from './components/StrudelReplView';
 import { preprocess } from './preprocess';
 
 
+
 // let globalEditor = null;
 
 const handleD3Data = (event) => {
@@ -77,6 +78,12 @@ export default function StrudelDemo() {
 
     const handleEditorReady = (i) => setEditor(i);
 
+    const [bpm, setBpm] = useState(90)
+    const cps = bpm / 120;
+
+    const [volume, setVolume] = useState(0.5);
+
+
     const handlePlay = () => {
         editor.evaluate()
     }
@@ -87,7 +94,7 @@ export default function StrudelDemo() {
 
     const handleProcess = () => {
         if (!editor) return;
-        const code = preprocess(songText, tracks);
+        const code = preprocess(songText, tracks, { cps, volume });
         editor.setCode(code)
     }
 
@@ -142,9 +149,13 @@ return (
                     </div>
                 </div>
                 <div className="row">
-                    <StrudelReplView  onEditorReady={handleEditorReady}/>
+                    <StrudelReplView  onEditorReady={handleEditorReady} volume={volume}/>
                     <div className="col-md-4">
-                        < DJControls tracks={tracks} onTracksChange={setTracks} />
+                        < DJControls 
+                        tracks={tracks} onTracksChange={setTracks}
+                        volume={volume} onVolumeChange = {setVolume}
+                        bpm={bpm} onBpmChange={setBpm}
+                         />
                     </div>
                 </div>
             </div>
