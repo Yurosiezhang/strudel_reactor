@@ -86,9 +86,20 @@ export default function StrudelDemo() {
 
     const [volume, setVolume] = useState(0.5);
 
+    const [hasCode, setHasCode] = useState(false)
+
 
     const handlePlay = () => {
-        editor.evaluate()
+        if (!editor || !hasCode){
+            window.alert('No strudle code yet. Click "Preprocess" first or use “Proc & Play”')
+            return;
+        }
+        try{
+            editor.evaluate()
+        }catch(e){
+            console.error(e);
+            window.alert('Please "Preprocess" to play!')         
+        }       
     }
 
     const handleStop = () => {
@@ -98,7 +109,8 @@ export default function StrudelDemo() {
     const handleProcess = () => {
         if (!editor) return;
         const code = preprocess(songText, tracks, { cps, volume });
-        editor.setCode(code)
+        editor.setCode(code);
+        setHasCode(true);
     }
 
     const handleProcAndPlay = () => {
