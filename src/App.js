@@ -10,6 +10,7 @@ import StrudelReplView from './components/StrudelReplView';
 import { preprocess } from './preprocess';
 import Graph from './components/Graph';
 import banner from './images/banner.png';
+import SettingControls from './components/SettingControls';
 
 
 
@@ -91,7 +92,7 @@ export default function StrudelDemo() {
 
     const handlePlay = () => {
         if (!editor || !hasCode){
-            window.alert('No strudle code yet. Click "Preprocess" first or use “Proc & Play”')
+            window.alert('No strudel code yet. Click "Preprocess" first or use “Proc & Play”')
             return;
         }
         try{
@@ -180,6 +181,14 @@ return (
                                 tracks={tracks} onTracksChange={setTracks}
                                 volume={volume} onVolumeChange = {setVolume}
                                 bpm={bpm} onBpmChange={setBpm}
+                            />
+                            < SettingControls 
+                                bpm={bpm}
+                                volume={volume}
+                                tracks={tracks}
+                                setBpm={setBpm}
+                                setVolume={setVolume}
+                                setTracks={setTracks}
                             />
                             < PlayButtons onPlay={handlePlay} onStop={handleStop} />
                         </div>                        
