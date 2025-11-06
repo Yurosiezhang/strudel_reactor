@@ -1,5 +1,4 @@
 export const coastline_tune = `
-
 // "coastline" @by eddyflux
 // @version 1.0
 

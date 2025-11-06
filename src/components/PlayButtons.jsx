@@ -5,7 +5,7 @@ import { FaPlay, FaStop } from 'react-icons/fa'
 function PlayButtons({ onPlay, onStop }) {
   return (
     <>
-      <div className="d-flex gap-3 justify-content-center">
+      <div className="d-flex gap-3 justify-content-center mb-3">
         <button className="btn btn-outline-primary rounded-circle p-3" onClick={onPlay}>
           <FaPlay size={25}/>
         </button>

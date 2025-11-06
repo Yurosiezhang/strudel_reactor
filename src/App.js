@@ -9,6 +9,8 @@ import PreprocessTextarea from './components/PreprocessTextarea';
 import StrudelReplView from './components/StrudelReplView';
 import { preprocess } from './preprocess';
 import Graph from './components/Graph';
+import banner from './images/banner.png';
+
 
 
 
@@ -132,7 +134,26 @@ export default function StrudelDemo() {
 
 return (
     <div className='App'>
-        <h2>Strudel Demo</h2>
+        <div className="top-rail"></div>
+        <header className="app-header mb-4">
+            <div className="container-fluid px-4">  
+                <div className="row align-items-end g-3">
+                {/* title & subtitle */}
+                <div className="col-12 col-md-8">
+                    <h1 className="app-title mb-2">Strudel Demo</h1>
+                    <p className="app-subtitle mb-0">~~ Live code Music: Preprocess → Play → Visualize ~~</p>
+                </div>
+                {/* banner */}
+                <div className="col-12 col-md-4">
+                    <img
+                    src={banner}
+                    alt="Music banner"
+                    className="header-banner w-100"
+                    />
+                </div>
+                </div>
+            </div>
+        </header>
         <main>
             <div className="container-fluid">
                 <div className="row">
@@ -140,20 +161,25 @@ return (
                         <PreprocessTextarea  defaultValue={songText} onChange={(e) => setSongText(e.target.value)} />
                     </div>
                     <div className="col-md-4">
-                        <h2 className='mb-3'>Control Panel</h2>
-                        < ProcButtons onProcess={handleProcess} onProAndPlay={handleProcAndPlay}/>                            
-                        < DJControls 
+                        <div className=' panel-card sticky-top' style={{ top: 16 }} >
+                            <h2 className='panel-title mb-3'>Control Panel</h2>
+                            < ProcButtons onProcess={handleProcess} onProAndPlay={handleProcAndPlay}/>                            
+                            < DJControls 
                                 tracks={tracks} onTracksChange={setTracks}
                                 volume={volume} onVolumeChange = {setVolume}
                                 bpm={bpm} onBpmChange={setBpm}
-                        />
-                        < PlayButtons onPlay={handlePlay} onStop={handleStop} />
+                            />
+                            < PlayButtons onPlay={handlePlay} onStop={handleStop} />
+                        </div>                        
                     </div>
                 </div>
                 <div className="row">
                     <StrudelReplView  onEditorReady={handleEditorReady} volume={volume}/>
                     <div className="col-md-4 mt-5">
-                        <Graph />
+                        <div className=' panel-card sticky-top' style={{ top: 16 }} >
+                            <h2 className='panel-title mb-3'>Graph Panel</h2>
+                            <Graph />
+                        </div>                       
                     </div>
                 </div>
             </div>
