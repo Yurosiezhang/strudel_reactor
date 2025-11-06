@@ -130,7 +130,6 @@ p, label, small, span {
   border-radius: 16px;
   box-shadow: 0 0 24px rgba(0,0,0,.28);
   filter: brightness(.95) saturate(1.1);
-  transition: transform .5s ease, filter .4s ease;
 }
 
 @media (max-width: 1400px) {
@@ -220,7 +219,6 @@ textarea {
   line-height: 1.5;
   padding: 1rem;
   resize: vertical;
-  transition: all 0.25s ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) inset;
 }
 
@@ -246,11 +244,10 @@ textarea {
 }
 
 .graph-img{
-  width: 100%;
+  width: 90%;
   aspect-ratio: 16 / 9;         
   object-fit: cover;             
-  filter: brightness(.95) saturate(1.05);
-  transition: transform .4s ease, filter .3s ease;
   display: block;
+  margin: 0 auto;
 }
 
