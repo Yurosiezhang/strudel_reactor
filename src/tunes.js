@@ -20,6 +20,7 @@ stack(
   )
   .bank("crate")
   .mask("<[0 1] 1 1 1>/16".early(0.5))
+  .log(e => ({ track: "drums", value: e.gain }))
   </track_drums>,
 
   // Chords
@@ -30,6 +31,7 @@ stack(
     .phaser(4)
     .room(0.5)
     .gain(0.5)
+    .log(e => ({ track: "chords", value: e.gain }))
   </track_chords>,
 
   // Melody
@@ -56,6 +58,7 @@ stack(
       .chunk(4, fast(2))
       .mask("<0 1 1 0>/16")
       .gain(perlin.range(0.6, 0.9))
+      .log(e => ({ track: "melody", value: e.gain }))
   )
   </track_melody>
 )
