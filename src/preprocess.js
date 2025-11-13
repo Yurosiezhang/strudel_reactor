@@ -12,7 +12,7 @@ export function preprocess(rawText, tracks ={}, { cps, volume } = {}){
 
     // Change volume
     if (typeof volume === 'number') {
-        processedText = processedText.replace(/\.gain\([^)]+\)/, `.gain(${volume})`);
+        processedText = processedText.replace(/\.gain\([^)]+\)(?![\s\S]*\.gain\()/, `.gain(${volume})`);
     }
 
         

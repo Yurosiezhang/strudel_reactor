@@ -10,25 +10,29 @@ setcps(0.75)
 let chords = chord("<Bbm9 Fm9>/4").dict('ireal')
 
 stack(
+  // Drums
   <track_drums>
   stack(
     s("bd").struct("<[x*<1 2> [~@3 x]] x>"),
     s("~ [rim, sd:<2 3>]").room("<0 .2>"),
     n("[0 <1 3>]*<2!3 4>").s("hh"),
-    s("rd:<1!3 2>*2").mask("<0 0 1 1>/16")
+    s("rd:<1!3 2>*2").mask("<0 0 1 1>/16").gain(0.6)
   )
   .bank("crate")
   .mask("<[0 1] 1 1 1>/16".early(0.5))
   </track_drums>,
 
+  // Chords
   <track_chords>
   chords.offset(-1)
     .voicing()
     .s("gm_epiano1:1")
     .phaser(4)
     .room(0.5)
+    .gain(0.5)
   </track_chords>,
 
+  // Melody
   <track_melody>
   stack(
     n("<0!3 1*2>")
@@ -51,6 +55,7 @@ stack(
       .rarely(ply("2"))
       .chunk(4, fast(2))
       .mask("<0 1 1 0>/16")
+      .gain(perlin.range(0.6, 0.9))
   )
   </track_melody>
 )
