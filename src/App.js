@@ -13,10 +13,6 @@ import banner from './images/banner.png';
 import SettingControls from './components/SettingControls';
 
 
-const handleD3Data = (event) => {
-    console.log(event.detail);
-};
-
 export default function StrudelDemo() {
 
     const [songText, setSongText] = useState(coastline_tune)
@@ -37,6 +33,9 @@ export default function StrudelDemo() {
     const [volume, setVolume] = useState(0.5);
 
     const [hasCode, setHasCode] = useState(false)
+
+    const hasRun = useRef(false);
+    const [jsonData, setJsonData] = useState([]);
 
 
     const handlePlay = () => {
@@ -67,6 +66,26 @@ export default function StrudelDemo() {
         handleProcess();
         editor?.evaluate();
     }
+
+    // Handle json log data
+    const handleD3Data = (event) => {
+        console.log(event.detail);
+        setJsonData(event.detail);
+    };
+
+    useEffect(()=>{
+        if (!hasRun.current){
+
+            document.addEventListener("d3Data", handleD3Data);
+            console_monkey_patch();
+            hasRun.current=true;
+        }
+        // clean up 
+        return () => {
+            document.removeEventListener("d3Data", handleD3Data);
+        };
+    },[])
+
 
 
 return (
@@ -123,7 +142,7 @@ return (
                     <div className="col-md-4 mt-5">
                         <div className=' panel-card sticky-top' style={{ top: 16 }} >
                             <h2 className='panel-title mb-3'>Graph Panel</h2>
-                            <Graph />
+                            <Graph data={jsonData} />
                         </div>                       
                     </div>
                 </div>
