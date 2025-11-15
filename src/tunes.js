@@ -20,7 +20,7 @@ stack(
   )
   .bank("crate")
   .mask("<[0 1] 1 1 1>/16".early(0.5))
-  .shape(perlin.range(0.1, 0.9))
+  .shape(perlin.range(0.1, 0.9)) // Param for d3 graph
   .log()
   </track_drums>,
 
@@ -30,7 +30,7 @@ stack(
     .voicing()
     .s("gm_epiano1:1")
     .phaser(4)
-    .room(perlin.range(0, 0.8))
+    .room(perlin.range(0, 0.8)) // Param for d3 graph
     .gain(0.5)
     .log()
   </track_chords>,
@@ -53,7 +53,7 @@ stack(
       .shape(0.3)
       .delay(0.25)
       .fm(sine.range(3,8).slow(8))
-      .lpf(sine.range(500,1000).slow(8))
+      .lpf(sine.range(500,1000).slow(8)) // Param for d3 graph
       .lpq(5)
       .rarely(ply("2"))
       .chunk(4, fast(2))

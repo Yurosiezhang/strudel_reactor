@@ -1,7 +1,6 @@
 import './App.css';
 import { useEffect, useRef, useState } from "react";
 import { coastline_tune } from './tunes';
-import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import DJControls from './components/DJControls';
 import PlayButtons from './components/PlayButtons';
 import ProcButtons from './components/ProcButtons';
@@ -34,9 +33,6 @@ export default function StrudelDemo() {
 
     const [hasCode, setHasCode] = useState(false)
 
-    const hasRun = useRef(false);
-    const [jsonData, setJsonData] = useState([]);
-
 
     const handlePlay = () => {
         if (!editor || !hasCode){
@@ -67,24 +63,7 @@ export default function StrudelDemo() {
         editor?.evaluate();
     }
 
-    // Handle json log data
-    const handleD3Data = (event) => {
-        console.log(event.detail);
-        setJsonData(event.detail);
-    };
 
-    useEffect(()=>{
-        if (!hasRun.current){
-
-            document.addEventListener("d3Data", handleD3Data);
-            console_monkey_patch();
-            hasRun.current=true;
-        }
-        // clean up 
-        return () => {
-            document.removeEventListener("d3Data", handleD3Data);
-        };
-    },[])
 
 
 
@@ -142,7 +121,7 @@ return (
                     <div className="col-md-4 mt-5">
                         <div className=' panel-card sticky-top' style={{ top: 16 }} >
                             <h2 className='panel-title mb-3'>Graph Panel</h2>
-                            <Graph data={jsonData} />
+                            <Graph />
                         </div>                       
                     </div>
                 </div>
