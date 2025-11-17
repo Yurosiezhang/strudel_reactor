@@ -90,7 +90,7 @@ function Graph() {
     let yDomain;
     if (selectedParam === "room") yDomain = [0, 1];
     else if (selectedParam === "shape") yDomain = [0, 1];
-    else if (selectedParam === "fmi") yDomain = [0, 8];
+    else if (selectedParam === "fmi") yDomain = [2, 8];
     else yDomain = [0, Math.max(1, d3.max(jsonData)) || 1];
 
     // Create a YScale
@@ -114,8 +114,8 @@ function Graph() {
         .attr("y2", yScale(yDomain[1]))
         .selectAll("stop")
         .data([
-            { offset: "0%", color: "green" },
-            { offset: "100%", color: "red" }
+            { offset: "0%", color: "#ff6b6b" },
+            { offset: "100%", color: "#845ef7" }
         ])
         .enter().append("stop")
         .attr("offset", function (d) { return d.offset; })
@@ -138,7 +138,15 @@ function Graph() {
     let yAxis = d3.axisLeft(yScale);
     chartGroup.append('g')
       .classed('axis y', true)
-      .call(yAxis);
+      .call(yAxis)
+      .selectAll("text")
+      .style("display", "none");
+
+    // axis line & ticks color
+    chartGroup.selectAll(".tick line")
+      .attr("stroke", "#796ba7ff");
+    chartGroup.selectAll(".domain")
+      .attr("stroke", "#382968ff");
 
   },[jsonData, selectedParam])
 
@@ -148,14 +156,20 @@ function Graph() {
       <div>
         <h5 className="mb-3">Real-time Audio Parameter Visualizer</h5>
         <select value={selectedParam} onChange={(e) => setSelectedParam(e.target.value)}
-          className="form-select w-auto mb-3">
+          className="form-select w-auto mb-3" 
+          style={{
+            border: "2px solid #a13596ff",
+            color: "#a13596ff",
+            backgroundColor: "#231c15ff"
+          }}>
           <option value="shape">Shape-Drums</option>
           <option value="room">Room-Chords</option>
           <option value="fmi">FMI-Melody</option>
 
         </select>
         <svg ref={svgRef} width="100%" height="400px"
-          className="border border-primary rounded p-2">
+          className="p-2" style={{ border: "2px solid #382968ff", borderRadius: "6px" }}
+          >
         </svg>
 
       </div>    

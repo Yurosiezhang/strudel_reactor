@@ -52,8 +52,8 @@ stack(
       .room(0.75)
       .shape(0.3)
       .delay(0.25)
-      .fm(sine.range(3,8).slow(8))
-      .lpf(sine.range(500,1000).slow(8)) // Param for d3 graph
+      .fm(sine.range(3,8).slow(8)) // Param for d3 graph
+      .lpf(sine.range(500,1000).slow(8)) 
       .lpq(5)
       .rarely(ply("2"))
       .chunk(4, fast(2))
