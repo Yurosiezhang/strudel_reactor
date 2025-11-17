@@ -1,34 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
 import * as d3 from "d3";
-import console_monkey_patch, { getD3Data } from '../console-monkey-patch';
+import console_monkey_patch from '../console-monkey-patch';
+
 
 function Graph() {
 
   const [jsonData, setJsonData] = useState([]);
   const hasRun = useRef(false);
-  const [selectedParam, setSelectedParam] = useState("");
+  const [selectedParam, setSelectedParam] = useState("shape"); // defualt is shape param
+  const MAX_ITEMS = 300;
 
-  // Handle json log data
-  const handleD3Data = (event) => {
-      console.log(event.detail);
-      setJsonData(event.detail);
-  };
-
-  useEffect(()=>{
-      if (!hasRun.current){
-
-          document.addEventListener("d3Data", handleD3Data);
-          console_monkey_patch();
-          hasRun.current=true;
-      }
-      // clean up 
-      return () => {
-          document.removeEventListener("d3Data", handleD3Data);
-      };
-  },[])
-
-  // Filter the param value
-  function LogToNum(input, param) {
+    // Filter the param value
+  function filterValue(input, param) {
     if (!input) { return 0 };
     var stringArray = input.split(/(\s+)/);
 
@@ -41,12 +24,45 @@ function Graph() {
     return 0;
   }
 
+  // Handle json log data
+  const handleD3Data = (event) => {
+      console.log(event.detail);
+      const array = event.detail;
+      if (!Array.isArray(array) || array.length === 0) return;
+      const last = array[array.length -1]
+      if(!last.includes(`${selectedParam}:`))return
+      const value = filterValue(last, selectedParam)
+
+      setJsonData((prev) => {
+        const next = [...prev, value];
+        if (next.length > MAX_ITEMS) next.shift();
+        return next;
+      })
+  };
+
+  useEffect(()=>{
+      if (!hasRun.current){
+          console_monkey_patch();
+          hasRun.current=true;
+      }
+      document.addEventListener("d3Data", handleD3Data);
+      // clean up 
+      return () => {
+          document.removeEventListener("d3Data", handleD3Data);
+      };
+  },[selectedParam])
+
+
+
   // Draw d3 graph
   useEffect(()=>{
 
     // select SVG element
     const svg = d3.select('svg');
     svg.selectAll("*").remove();
+
+    // if no data, no drawing 
+    if (jsonData.length === 0) return;
 
     // determine the size of the SVG element
     let w = svg.node().getBoundingClientRect().width;
@@ -56,15 +72,13 @@ function Graph() {
 
     const barWidth = w / jsonData.length;
 
-    const dataValues = jsonData.map((d) => LogToNum(d, selectedParam));
-
 
     // set dynamic yscale
     let yDomain;
     if (selectedParam === "room") yDomain = [0.2, 0.8];
-    else if (selectedParam === "shape") yDomain = [0.2, 0.4];
+    else if (selectedParam === "shape") yDomain = [0, 1];
     else if (selectedParam === "fmi") yDomain = [0, 8];
-    else yDomain = [0, d3.max(dataValues, (d) => d) || 1];
+    else yDomain = [0, Math.max(1, d3.max(jsonData)) || 1];
 
     // Create a YScale
     let yScale = d3.scaleLinear()
@@ -99,7 +113,7 @@ function Graph() {
     // Draw lines
     chartGroup
       .append('path')
-      .datum(dataValues)
+      .datum(jsonData)
       .attr('fill', 'none')
       .attr('stroke', 'url(#line-gradient)')
       .attr('stroke-width', 1.5)
