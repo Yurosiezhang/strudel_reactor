@@ -8,6 +8,7 @@ function Graph() {
   const [jsonData, setJsonData] = useState([]);
   const hasRun = useRef(false);
   const [selectedParam, setSelectedParam] = useState("shape"); // defualt is shape param
+  const svgRef = useRef(null)
   const MAX_ITEMS = 300;
 
     // Filter the param value
@@ -29,10 +30,13 @@ function Graph() {
       console.log(event.detail);
       const array = event.detail;
       if (!Array.isArray(array) || array.length === 0) return;
+
       const last = array[array.length -1]
+      // Ignore the updates without the selected param
       if(!last.includes(`${selectedParam}:`))return
       const value = filterValue(last, selectedParam)
 
+      // Append the new value
       setJsonData((prev) => {
         const next = [...prev, value];
         if (next.length > MAX_ITEMS) next.shift();
@@ -40,6 +44,7 @@ function Graph() {
       })
   };
 
+  // Initialise the event listeners
   useEffect(()=>{
       if (!hasRun.current){
           console_monkey_patch();
@@ -52,30 +57,38 @@ function Graph() {
       };
   },[selectedParam])
 
-
+  // Clear the previous selected param's data
+  useEffect(() => {
+    setJsonData([]);
+  }, [selectedParam]);
 
   // Draw d3 graph
   useEffect(()=>{
 
+    const svgNode = svgRef.current;
+    if (!svgNode) return;
+
     // select SVG element
-    const svg = d3.select('svg');
+    const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
     // if no data, no drawing 
     if (jsonData.length === 0) return;
 
     // determine the size of the SVG element
-    let w = svg.node().getBoundingClientRect().width;
+    let w = svgNode.getBoundingClientRect().width;
     w = w - 40
-    let h = svg.node().getBoundingClientRect().height;
+    let h = svgNode.getBoundingClientRect().height;
     h = h - 25
 
-    const barWidth = w / jsonData.length;
+    const xScale = d3.scaleLinear()
+      .domain([0, jsonData.length - 1])
+      .range([30, 30 + w]);
 
 
     // set dynamic yscale
     let yDomain;
-    if (selectedParam === "room") yDomain = [0.2, 0.8];
+    if (selectedParam === "room") yDomain = [0, 1];
     else if (selectedParam === "shape") yDomain = [0, 1];
     else if (selectedParam === "fmi") yDomain = [0, 8];
     else yDomain = [0, Math.max(1, d3.max(jsonData)) || 1];
@@ -118,7 +131,7 @@ function Graph() {
       .attr('stroke', 'url(#line-gradient)')
       .attr('stroke-width', 1.5)
       .attr('d', d3.line()
-        .x((d, i) => i * barWidth)
+        .x((d, i) => xScale(i))
         .y((d) => yScale(d))
       )
 
@@ -141,7 +154,7 @@ function Graph() {
           <option value="fmi">FMI-Melody</option>
 
         </select>
-        <svg width="100%" height="400px"
+        <svg ref={svgRef} width="100%" height="400px"
           className="border border-primary rounded p-2">
         </svg>
 
