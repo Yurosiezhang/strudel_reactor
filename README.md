@@ -78,7 +78,7 @@ If a toggled track does not contain shape, room, or fmi logging, the graph will 
 The graph stores only recent values and does not retain historical data after page refresh.
 
 ## Demonstration Video:
-
+https://youtu.be/TQdO-KUTdbU
 
 
 ## Tech Stack:
