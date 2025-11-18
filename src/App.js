@@ -1,7 +1,6 @@
 import './App.css';
 import { useEffect, useRef, useState } from "react";
 import { coastline_tune } from './tunes';
-import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import DJControls from './components/DJControls';
 import PlayButtons from './components/PlayButtons';
 import ProcButtons from './components/ProcButtons';
@@ -12,10 +11,6 @@ import Graph from './components/Graph';
 import banner from './images/banner.png';
 import SettingControls from './components/SettingControls';
 
-
-const handleD3Data = (event) => {
-    console.log(event.detail);
-};
 
 export default function StrudelDemo() {
 
@@ -67,6 +62,9 @@ export default function StrudelDemo() {
         handleProcess();
         editor?.evaluate();
     }
+
+
+
 
 
 return (

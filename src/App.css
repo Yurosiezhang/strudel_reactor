@@ -49,13 +49,10 @@ h1, h2, h3 {
   font-weight: 600;
 }
 
-p, label, small, span {
+p, label, small, span, h5 {
   color: #dfdbce; 
 }
 
-.text-muted{
-  color: #d4d2cbc9; 
-}
 
 /* padding & margin adjustment */
 .container-fluid { 
@@ -134,17 +131,6 @@ p, label, small, span {
 
 @media (max-width: 1400px) {
   .header-banner { height: 130px; }
-}
-
-
-
-textarea {
-  background-color: #181818;
-  color: #ffffff;
-  border: 1px solid #2a2a2a;
-  border-radius: 8px;
-  padding: 10px;
-  font-family: monospace;
 }
 
 .App button,

@@ -24,7 +24,7 @@ function DJControls({
                     checked={currentTracks.drums}
                     onChange={(e) => onTracksChange({...currentTracks, drums: e.target.checked})}
                     />
-                    <label className="form-check-label" htmlFor="s1">Drums</label>
+                    <label className="form-check-label" htmlFor="drums">Drums</label>
                 </div>
 
                 {/* Chords */}
@@ -33,7 +33,7 @@ function DJControls({
                     checked={currentTracks.chords}
                     onChange={(e) => onTracksChange({...currentTracks, chords: e.target.checked})}
                     />
-                    <label className="form-check-label" htmlFor="d1">Chords</label>
+                    <label className="form-check-label" htmlFor="chords">Chords</label>
                 </div>
 
                 {/* Melody */}
@@ -42,7 +42,7 @@ function DJControls({
                     checked={currentTracks.melody}
                     onChange={(e) => onTracksChange({...currentTracks, melody: e.target.checked})}
                     />
-                    <label className="form-check-label" htmlFor="d2">Melody</label>
+                    <label className="form-check-label" htmlFor="melody">Melody</label>
                 </div>
 
             </div>
